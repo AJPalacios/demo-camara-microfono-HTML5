@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Camara y microfono</title>
+</head>
+<body>
+	<video id="video"></video>
+	<script>
+	window.addEventListener('load',init);
+	function init(){
+
+		var video=document.getElementById('video');
+
+		navigator.getUserMedia = (
+			navigator.GetUserMedia ||
+			navigator.webkitGetUserMedia ||
+			navigator.mozGetUserMedia ||
+			navigator.msGetUserMedia 
+			);
+		// Puedes poner video en false o audio en false para que funcione uno de los dos 
+		
+		if (navigator.getUserMedia){
+			navigator.getUserMedia({video:true, audio:true},function(stream){
+				video.src = window.URL.createObjectURL(stream);
+				video.play();
+			},
+			function(e) {
+				console.log(e);
+			});
+		}
+		else{
+			alert("Tu navegador no soporta este sitio");
+		}
+	}
+	</script>
+</body>
+</html>
